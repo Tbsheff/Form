@@ -60,8 +60,63 @@
 
 <main>
     <h1>Survey</h1>
-    
-    <div class="loader">
+    <section>
+        <h2>New Testament Survey</h2>
+        <form>
+            <label for="name">Full name</label>
+
+            <input type="text" name="name" id="name">
+
+            <label for="email">Email address</label>
+            <input type="email" name="email" id="email" required>
+
+            <label for="phone">Phone number</label>
+            <input type="tel" name="phone" id="phone">
+
+            <label for="month">Your favorite month</label>
+            <input type="month" name="month" id="month">
+
+            <fieldset>
+                <legend>Which of the following are the 4 Gospels? (Check all that apply)</legend>
+
+     
+                <input type="checkbox" id="matthew" name="gospels" value="matthew">
+                <label for="matthew">Matthew</label>
+
+                <input type="checkbox" id="mark" name="gospels" value="mark">
+                <label for="mark">Mark</label>
+
+                <input type="checkbox" id="Luke" name="gospels" value="luke">
+                <label for="luke">Luke</label>
+
+                <input type="checkbox" id="john" name="gospels" value="john">
+                <label for="john">John</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Which is your favorite gospel?</legend>
+
+                <input type="radio" name="fav" id="matt" value="matt">
+                <label for="matt">Matthew</label>
+
+                <input type="radio" name="fav" id="mark2" value="mark2">
+                <label for="mark2">Mark</label>
+
+                <input type="radio" name="fav" id="luke2" value="luke2">
+                <label for="luke2">Luke</label>
+
+                <input type="radio" name="fav" id="john2" value="john2">
+                <label for="john2">John</label>
+            </fieldset>
+
+            <label for="testimony">Share your testimony</label>
+            <textarea name="testimony" id="testimony" rows="10" placeholder="Record your testimony here"></textarea>
+
+            <button type="submit">Submit Now</button>
+
+        </form>
+    </section>
+    <!-- <div class="loader">
         <div></div>
         <div></div>
         <div></div>
@@ -71,7 +126,7 @@
         <div></div>
         <div></div>
         <div></div>
-      </div>
+      </div> -->
       <!-- <div class="svg">
         <svg viewbox="0 0 120 120" width="200" height="200">
 
