@@ -15,7 +15,8 @@ img {
     display: block;
 }
 
-.button, button {
+.button,
+button {
     display: inline-block;
     text-align: center;
     background-color: var(--pale-cerulean);
@@ -34,7 +35,8 @@ img {
     transition: transform 300ms;
 }
 
-.button:hover, button:hover {
+.button:hover,
+button:hover {
     background-color: var(--burnt-sierra);
     color: var(--slate);
     transform: scale(0.8);
@@ -237,7 +239,7 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
-     padding-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75), transparent 100%);
 }
 
@@ -601,8 +603,8 @@ fieldset {
     display: grid;
     grid-template-columns: min-content 1fr;
     grid-column-gap: 0.75rem;
-    
- grid-row-gap: 0.75rem;
+
+    grid-row-gap: 0.75rem;
     border: none;
     margin: 0;
     padding: 0;
@@ -626,8 +628,9 @@ form button {
     justify-self: center;
 }
 
-input:hover, input:focus {
-background-color: lightyellow;
+input:hover,
+input:focus {
+    background-color: lightyellow;
 }
 
 input:focus {
@@ -635,7 +638,7 @@ input:focus {
     outline: 1px solid green;
 }
 
-input[type=checkbox]{
+input[type=checkbox] {
     appearance: none;
     -webkit-appearance: none;
     width: 24px;
@@ -649,7 +652,7 @@ input[type=checkbox]:checked {
     background-color: var(--burnt-sierra);
 }
 
-input[type=checkbox]::after{
+input[type=checkbox]::after {
     content: "";
     display: block;
     position: absolute;
@@ -664,11 +667,11 @@ input[type=checkbox]::after{
     transition: opacity 200ms;
 }
 
-input[type=checkbox]:checked::after{
+input[type=checkbox]:checked::after {
     opacity: 1;
 }
 
-input[type=radio]{
+input[type=radio] {
     appearance: none;
     width: 15px;
     height: 15px;
@@ -683,9 +686,9 @@ input[type=radio]:checked {
     background-color: var(--burnt-sierra);
 }
 
-.fav-gospel > label {
+.fav-gospel>label {
     position: relative;
-    bottom:16%
+    bottom: 16%
 }
 
 section {
@@ -696,7 +699,10 @@ section {
 }
 
 
-input[type=text], input[type=email], input[type=tel], textarea{
+input[type=text],
+input[type=email],
+input[type=tel],
+textarea {
     background-color: var(--pale-cerulean);
     opacity: 50%;
 }
