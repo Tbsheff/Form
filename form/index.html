@@ -59,22 +59,39 @@
 
 
 <main>
-    <h1>Survey</h1>
+    <h1>New Testament Survey</h1>
     <section>
-        <h2>New Testament Survey</h2>
-        <form>
+         <div class="cross"><img src="../images/biblencross.svg" alt="Bible and Cross"></div>
+         <div class="loading hidden">
+            <div class="loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+         </div>
+         <p class="success-message hidden">Thank you for your input!</p>
+         <p class="error-message hidden">Something has gone terribly wrong and I'm rather afraid I don't know what to
+             do.
+         </p>
+        <form name="NewTestament">
             <label for="name">Full name</label>
 
             <input type="text" name="name" id="name">
 
-            <label for="email">Email address</label>
+            <label for="email">Email address*</label>
             <input type="email" name="email" id="email" required>
 
             <label for="phone">Phone number</label>
             <input type="tel" name="phone" id="phone">
 
-            <label for="month">Your favorite month</label>
-            <input type="month" name="month" id="month">
+            <label for="verse">Your favorite scripture</label>
+            <input type="text" name="verse" id="verse" placeholder="John 3:16">
 
             <fieldset>
                 <legend>Which of the following are the 4 Gospels? (Check all that apply)</legend>
@@ -86,14 +103,14 @@
                 <input type="checkbox" id="mark" name="gospels" value="mark">
                 <label for="mark">Mark</label>
 
-                <input type="checkbox" id="Luke" name="gospels" value="luke">
+                <input type="checkbox" id="luke" name="gospels" value="luke">
                 <label for="luke">Luke</label>
 
                 <input type="checkbox" id="john" name="gospels" value="john">
                 <label for="john">John</label>
             </fieldset>
 
-            <fieldset>
+            <fieldset class="fav-gospel">
                 <legend>Which is your favorite gospel?</legend>
 
                 <input type="radio" name="fav" id="matt" value="matt">
@@ -116,17 +133,7 @@
 
         </form>
     </section>
-    <!-- <div class="loader">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div> -->
+    
       <!-- <div class="svg">
         <svg viewbox="0 0 120 120" width="200" height="200">
 
@@ -137,11 +144,89 @@
 
     </svg>
 </div> -->
-    <div class="cross"><img src="../images/biblencross.svg" alt="Bible and Cross"></div>
+   
 </main>
     <footer>
         <p>TYLER SHOULD GET 100% ON THIS PROJECT</p>
     </footer>
+    <script>
+        // enter the URL for your Google Sheet 
+        const scriptURL =
+            'https://script.google.com/macros/s/AKfycbztj5803HBFYIivDynnuC12DXGsVIfamS0o0Y5-cdfIKMIO1h_I5KLiEGGy8XbMGJ5pEg/exec'
+
+        // add a name attribute to your <form> and enter its value here 
+        const form = document.forms['NewTestament']
+
+        // enter the value of your checkboxes' name attribute
+        const checkboxName = "gospels"
+
+        // set these to your loader and message classes
+        const loading = document.querySelector('.loading')
+        const successMessage = document.querySelector('.success-message')
+        const errorMessage = document.querySelector('.error-message')
+
+        // this will run when the submit button is clicked
+        form.addEventListener('submit', event => {
+            // stops default form handling so we can submit it to Google Sheets instead
+            event.preventDefault()
+
+            // show the loader and hide form
+            form.classList.add('hidden')
+            loading.classList.remove('hidden')
+
+            // collect the form values into an object that can be sent to Google Sheets
+            let fd = new FormData(form);
+
+            /* If more than one checkbox is selected, the form will have multiple keys 
+               (checkbox name). Only the first checkbox value would be entered into 
+               Google Sheets. 
+               To get around this, concat all the selected checkbox values into a single 
+               string and send that value */
+
+            // grab all the selected values stored as key/value pairs of checkboxName/value
+            let checkBoxValues = fd.getAll(checkboxName)
+
+            // then delete them from the formData object
+            fd.delete(checkboxName);
+
+            // create a string
+            let text = ""
+            if (checkBoxValues.length <= 2) {
+                text = checkBoxValues.join(" and ")
+            } else {
+                let end = checkBoxValues.pop();
+                text = checkBoxValues.join(", ");
+                text += ", and " + end;
+            }
+            // add the key/value pair checkboxName/text back to the formData object
+            fd.append(checkboxName, text);
+
+            // use an asynchronous request to POST your formData object to your Google Sheet
+            fetch(scriptURL, {
+                    method: 'POST',
+                    body: fd,
+                })
+                // if response ok, show success message and hide loader, else display error
+                .then(response => {
+                    loading.classList.add('hidden')
+                    if (response.ok) {
+                        console.log('Success!', response)
+                        successMessage.classList.remove('hidden')
+                    } else {
+                        console.log(
+                            "Something has gone terribly wrong and I'm rather afraid I don't know what to do.",
+                            response)
+                        errorMessage.classList.remove('hidden')
+                    }
+                })
+                // if error, show error message and hide loader
+                .catch(error => {
+                    console.error('Error!', error.message)
+                    errorMessage.classList.remove('hidden')
+                    loading.classList.add('hidden')
+                })
+        })
+    </script>
 </body>
 
 </html>

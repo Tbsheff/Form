@@ -15,7 +15,7 @@ img {
     display: block;
 }
 
-.button {
+.button, button {
     display: inline-block;
     text-align: center;
     background-color: var(--pale-cerulean);
@@ -34,7 +34,7 @@ img {
     transition: transform 300ms;
 }
 
-.button:hover {
+.button:hover, button:hover {
     background-color: var(--burnt-sierra);
     color: var(--slate);
     transform: scale(0.8);
@@ -124,11 +124,10 @@ footer {
 }
 
 .cards {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 1rem;
-    flex: 1 1 40%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
     width: 100%;
     height: 100%;
     font-size: 2rem;
@@ -339,8 +338,6 @@ footer {
 
 .cross {
     padding: 1rem;
-    width: 25rem;
-    align-self: center;
 }
 
 nav ul {
@@ -570,7 +567,150 @@ nav a {
     order: 0;
 }
 
+
+
+@keyframes cube-grid {
+
+    0%,
+    70%,
+    100% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(0);
+        opacity: 0.6;
+
+        transform: scale3D(0, 0, 1, 45deg);
+        opacity: 0.1;
+    }
+}
+
+section {
+    margin: 0 1rem;
+}
+
+form {
+    display: grid;
+    align-items: center;
+}
+
+
+
+fieldset {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-column-gap: 0.75rem;
+    
+ grid-row-gap: 0.75rem;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+form input,
+fieldset,
+textarea {
+    margin-bottom: 1rem;
+}
+
+legend {
+    grid-column: 1 / span 2;
+    margin-bottom: 1rem;
+}
+
+form button {
+    border-radius: 5%;
+    margin: 0;
+    margin-bottom: 1rem;
+    justify-self: center;
+}
+
+input:hover, input:focus {
+background-color: lightyellow;
+}
+
+input:focus {
+    border-color: transparent;
+    outline: 1px solid green;
+}
+
+input[type=checkbox]{
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 20%;
+    position: relative;
+    border: 1px solid var(--burnt-sierra);
+}
+
+input[type=checkbox]:checked {
+    background-color: var(--burnt-sierra);
+}
+
+input[type=checkbox]::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 6px;
+    height: 14px;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    left: 8px;
+    top: 1px;
+    opacity: 0;
+    transform: rotate(45deg);
+    transition: opacity 200ms;
+}
+
+input[type=checkbox]:checked::after{
+    opacity: 1;
+}
+
+input[type=radio]{
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid var(--burnt-sierra);
+    border-radius: 50%;
+    align-items: center;
+    position: relative;
+    margin: 0;
+}
+
+input[type=radio]:checked {
+    background-color: var(--burnt-sierra);
+}
+
+.fav-gospel > label {
+    position: relative;
+    bottom:16%
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0 1rem;
+}
+
+
+input[type=text], input[type=email], input[type=tel], textarea{
+    background-color: var(--pale-cerulean);
+    opacity: 50%;
+}
+
+.hidden {
+    display: none !important;
+}
+
 @media (min-width: 600px) {
+    section {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
     .main-menu .menu-icon {
         display: none;
     }
@@ -650,104 +790,50 @@ nav a {
         transform-origin: left;
     }
 
-     .cards {
-         flex-direction: row;
-         flex-wrap: wrap;
-         justify-content: center;
-         gap: 2rem;
-         font-size: 1.5rem;
-         line-height: 1.5rem;
-     }
+    .cards {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+    }
 
-     .card {
-         flex-direction: row;
-         flex-basis: 40%;
-     }
+    .card {
+        flex-direction: row;
+        flex-basis: 40%;
+    }
 
-     .panel {
-         flex-direction: row;
-         gap: 1.5rem;
-         margin: 2rem;
-         padding: 0;
-         overflow: hidden;
-     }
+    .panel {
+        flex-direction: row;
+        gap: 1.5rem;
+        margin: 2rem;
+        padding: 0;
+        overflow: hidden;
+    }
 
-     .panel .left {
-         order: -1;
-     }
+    .panel .left {
+        order: -1;
+    }
 
-     .panel .text-wrapper {
-         flex: 1 1 60%;
-     }
+    .panel .text-wrapper {
+        flex: 1 1 60%;
+    }
 
-     .panel .image-wrapper {
-         flex: 1 1 40%;
-     }
+    .panel .image-wrapper {
+        flex: 1 1 40%;
+    }
+
+    .cards {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
 }
-
 
 @media (min-width: 1000px) {
     .cards {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: center;
-        gap: 2rem;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        grid-gap: 1.5rem;
     }
-}
-
-
-@keyframes cube-grid {
-
-    0%,
-    70%,
-    100% {
-        transform: scale(1);
-    }
-
-    35% {
-        transform: scale(0);
-        opacity: 0.6;
-
-        transform: scale3D(0, 0, 1, 45deg);
-        opacity: 0.1;
-    }
-}
-
-section {
-    margin: 0 1rem;
-}
-
-form {
-    display: grid;
-}
-
-
-
-fieldset {
-    display: grid;
-    grid-template-columns: min-content 1fr;
-    grid-column-gap: 0.75rem;
-    
- grid-row-gap: 0.75rem;
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-form input,
-fieldset,
-textarea {
-    margin-bottom: 1rem;
-}
-
-legend {
-    grid-column: 1 / span 2;
-    margin-bottom: 1rem;
-}
-
-form button {
-    border-radius: 5%;
-    margin: 0;
-    margin-bottom: 1rem;
-    justify-self: center;
 }
