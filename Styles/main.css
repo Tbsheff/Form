@@ -714,8 +714,12 @@ textarea {
 .success-message {
     font-size: 2rem;
     text-align: center; 
-    text-shadow: 2px 2px #000000;
+    line-height: 2.5rem;
 }
+
+
+
+
 
 @media (min-width: 600px) {
     section {
@@ -849,3 +853,4 @@ textarea {
         grid-gap: 1.5rem;
     }
 }
+
